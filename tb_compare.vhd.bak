@@ -1,0 +1,23 @@
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+USE Ieee.numeric_std.all;
+
+
+
+ENTITY tb_compare IS
+END tb_compare;
+
+
+
+ARCHITECTURE test of tb_accumulator IS
+	
+	ENTITY component IS
+
+	PORT( price_in : IN signed(6 downto 0);
+			accum_in : IN signed(6 downto 0);
+			enable : IN STD_LOGIC;
+			change : OUT signed(6 downto 0);
+			insert_out : OUT signed(6 downto 0);
+			done : OUT STD_LOGIC);
+
+	END component;

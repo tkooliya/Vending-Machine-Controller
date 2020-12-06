@@ -1,0 +1,75 @@
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+USE Ieee.numeric_std.all;
+
+
+
+ENTITY tb_accumulator IS
+END tb_accumulator;
+
+
+
+ARCHITECTURE test of tb_sequencer IS
+
+	component accumulator IS
+	PORT( clk : IN STD_LOGIC;
+			reset : IN STD_LOGIC;
+			enable : IN STD_LOGIC;
+			N : IN signed(6 downto 0); -- quantity of nickels, not price, also need to add an extra bit for signed operation
+			D : IN signed(6 downto 0); -- represents COUNT of coins, not cumulated PRICE!
+			Q : IN signed(6 downto 0);
+			accum_out : OUT signed(6 downto 0));
+	END component;
+	
+	
+	signal clksig : STD_LOGIC;
+	signal resetsig : STD_LOGIC;
+	signal enablesig : STD_LOGIC;
+	signal Ncsig : signed(6 downto 0); -- quantity of nickels, not price, also need to add an extra bit for signed operation
+	signal Dcsig : signed(6 downto 0); -- represents COUNT of coins, not cumulated PRICE!
+	signal Qcsig : signed(6 downto 0);
+	signal accum_outsig : signed(6 downto 0));
+	
+	begin
+
+		DUT : accumulator
+		port map(clk => clksig, reset => resetsig, enable => enablesig, N => Ncsig, D => Dcsig, Q => Qcsig, accum_out => accum_outsig);
+		
+		process is
+		
+			begin
+			
+			clksig <= '0';
+			resetsig <= '0';
+			enablesig <= '1';
+			Ncsig <= "0000001";
+			Dcsig <= "0000001";
+			Qcsig <= "0000001";
+			wait for 50 ns; 
+			
+			clksig <= '1';
+			resetsig <= '0';
+			enablesig <= '1';
+			Ncsig <= "0000001";
+			Dcsig <= "0000000";
+			Qcsig <= "0000001";			
+			wait for 50 ns;
+			
+			clksig <= '0';
+			resetsig <= '0';
+			enablesig <= '1';
+			Ncsig <= "0000001";
+			Dcsig <= "0000010";
+			Qcsig <= "0000001";
+			wait for 50 ns;
+			
+			clksig <= '1';
+			resetsig <= '0';
+			enablesig <= '0';
+			Ncsig <= "0000001";
+			Dcsig <= "0000001";
+			Qcsig <= "0000011";
+			wait for 50 ns;
+			
+		end process;
+end test;

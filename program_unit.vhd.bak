@@ -1,0 +1,23 @@
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+USE Ieee.numeric_std.all;
+
+
+
+ENTITY program_unit IS
+
+PORT( clk : IN STD_LOGIC;
+		reset : IN STD_LOGIC;
+		set : IN STD_LOGIC;
+		enable : IN STD_LOGIC;
+		product : IN STD_LOGIC;
+		NDQ : IN STD_LOGIC;
+		code_out : OUT STD_LOGIC
+		data_mem : OUT STD_LOGIC
+		addr_out : OUT STD_LOGIC
+		done : OUT STD_LOGIC
+		wen : OUT STD_LOGIC);
+
+END program_unit
+
+ARCHITECTURE Behaviour of distress_box is

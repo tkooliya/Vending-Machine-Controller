@@ -1,0 +1,69 @@
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+USE Ieee.numeric_std.all;
+
+
+
+ENTITY accumulator IS
+
+PORT( clk : IN STD_LOGIC;
+		reset : IN STD_LOGIC;
+		enable : IN STD_LOGIC;
+		N : IN signed(6 downto 0); -- quantity of nickels, not price, also need to add an extra bit for signed operation
+		D : IN signed(6 downto 0); -- represents COUNT of coins, not cumulated PRICE!
+		Q : IN signed(6 downto 0);
+		accum_out : OUT signed(6 downto 0));
+
+
+END accumulator;
+
+ARCHITECTURE Behaviour of accumulator is
+
+	signal totalvalbin : signed(6 downto 0);
+	signal totalvalint : integer;
+	signal Nsig : integer;
+	signal Dsig : integer;
+	signal Qsig : integer;
+	
+
+	begin 
+	
+	process(clk, enable)
+	
+	if (rising_edge(clk))
+	
+		if enable = '1'
+			
+			Nsig <= to_integer(N);
+			Dsig <= to_integer(D); -- converting to integer so we can multiply by the coin's respective monetary value easily
+			Qsig <= to_integer(Q);
+			
+			totalvalint <= ((5*N) + (10*D) + (25*Q));
+			accum_out <= to_signed(totalvalint, accum_out); -- accum_out represents the accumulated monetary value
+			
+		end if;
+	end if;
+	
+end Behaviour;
+		
+		
+		
+		
+		
+			
+			
+		
+		
+		
+		
+		
+		
+		
+		
+	else
+	
+	
+	
+		
+	
+	
